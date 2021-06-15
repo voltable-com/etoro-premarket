@@ -5,7 +5,6 @@ let jsInitCheck = setInterval(check_after_loading, 300);
 
 function check_after_loading() {
     let spans = document.querySelectorAll(selector);
-    console.log(spans.length);
     if (spans.length > 0) {
         for (let i = 0; i < spans.length; i++) {
             let s = spans[i];
@@ -21,7 +20,6 @@ function check_after_loading() {
     }
 
     let divs = document.getElementsByClassName(selector1);
-    console.log(divs.length);
     if (divs.length > 0) {
         for (let i = 0; i < divs.length; i++) {
             let d = divs[i];
