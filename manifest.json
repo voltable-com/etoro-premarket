@@ -4,17 +4,27 @@
   "version": "0.1.0",
   "default_locale": "en",
   "description": "__MSG_extensionDescription__",
-  "author": "signetro",
+  "author": "Toni Dorian Sfetcu",
   "browser_specific_settings": {
     "gecko": {
       "id": "etoro-premarket@voltable.com",
       "strict_min_version": "64.0"
     }
   },
-  "homepage_url": "https://example.org/my-addon"
+  "homepage_url": "https://github.com/voltable-com",
   "background": {
     "page": "background.html"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.etoro.com/*"
+      ],
+      "js": [
+        "page.js"
+      ]
+    }
+  ],
   "permissions": [
     "*://www.etoro.com/*",
     "activeTab",
