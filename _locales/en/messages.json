@@ -1,0 +1,17 @@
+{
+  "extensionName": {
+    "message": "Etoro: Show Premarket Stock Value",
+    "description": "Etoro: Show Premarket Stock Value"
+  },
+
+  "extensionDescription": {
+    "message": "Etoro helper - show market price for selected stock and market links to a few pages",
+    "description": "Etoro helper - show market price for selected stock and market links to a few pages"
+  },
+
+  "menuPremarket": {
+    "message": "Etoro Premarket Stock Value",
+    "description": "Etoro Premarket Stock Value"
+  }
+
+}

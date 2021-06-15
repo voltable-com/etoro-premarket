@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "version": "0.1.0",
+  "default_locale": "en",
+  "description": "__MSG_extensionDescription__",
+  "author": "signetro",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "etoro-premarket@voltable.com",
+      "strict_min_version": "64.0"
+    }
+  },
+  "homepage_url": "https://example.org/my-addon"
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "*://www.etoro.com/*",
+    "activeTab",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "icons/beasts-16.png",
+    "32": "icons/beasts-32.png",
+    "64": "icons/beasts-64.png",
+    "48": "icons/beasts-48.png",
+    "96": "icons/beasts-96.png"
+  }
+}
