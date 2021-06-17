@@ -7,19 +7,12 @@ browser.contextMenus.create({
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === "show-premarket-stock-value") {
-        // Examples: text and HTML to be copied.
-        let link = info.linkUrl;
-        link = link.replace("https://www.etoro.com/markets/", "");
-        link = link.replace("https://www.etoro.com/portfolio/", "");
-        link = link.replace(/https:\/\/www\.etoro\.com\/people\/.+\/portfolio\//g, "");
-        link = link.replace(/https:\/\/www\.etoro\.com\/copyportfolios\/.+\/portfolio\//g, "");
-        let code = link.split('/')[0];
-        let codes = code.split('.');
-        if (codes.length > 1) {
-            code = codes[0];
+        let link = getLink(info.linkUrl);
+        let code = getCode(link);
+        let marketwatch = "https://www.marketwatch.com/investing/stock/" + escapeHTML(code[0]);
+        if(code[1] !== '') {
+            marketwatch = marketwatch + '?countryCode=' + code[1]
         }
-
-        const marketwatch = "https://www.marketwatch.com/investing/stock/" + escapeHTML(code);
 
         browser.tabs.create({"url": marketwatch});
 
@@ -34,4 +27,45 @@ function escapeHTML(str) {
         .replace(/&/g, "&amp;")
         .replace(/"/g, "&quot;").replace(/'/g, "&#39;")
         .replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+
+function getLink(link) {
+    link = link.replace("https://www.etoro.com/markets/", "");
+    link = link.replace("https://www.etoro.com/portfolio/", "");
+    link = link.replace(/https:\/\/www\.etoro\.com\/people\/.+\/portfolio\//g, "");
+    link = link.replace(/https:\/\/www\.etoro\.com\/copyportfolios\/.+\/portfolio\//g, "");
+
+    return link;
+}
+
+function getCode(link) {
+    const validMarketSuffixes = [
+        'us', 'de', 'hk', 'st',
+        'nv', 'l', 'pa', 'mc',
+        'mi', 'zu', 'ol', 'co',
+        'he', 'lsb', 'br'
+    ];
+    let country = '';
+    let code = link.split('/')[0];
+    let codes = code.split('.');
+    if (codes.length > 1) {
+        let suffix = codes[codes.length - 1];
+        if (validMarketSuffixes.indexOf(suffix)) {
+            let lastIndex = code.lastIndexOf('.' +  suffix);
+            code = code.substring(0, lastIndex);
+            let codeInt = parseInt(codes[0]);
+            if (!isNaN(codeInt)) {
+                code = codeInt
+            }
+
+            if(suffix === 'l') {
+                country = 'UK';
+            }
+        }
+    }
+
+    code = code.replace('-', '.');
+
+    return [code, country];
 }
