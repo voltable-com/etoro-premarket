@@ -35,6 +35,7 @@ function getLink(link) {
     link = link.replace("https://www.etoro.com/portfolio/", "");
     link = link.replace(/https:\/\/www\.etoro\.com\/people\/.+\/portfolio\//g, "");
     link = link.replace(/https:\/\/www\.etoro\.com\/copyportfolios\/.+\/portfolio\//g, "");
+    link = link.replace(/https:\/\/www\.etoro\.com\/people\/.+\/portfolio\/history\//g, "");
 
     return link;
 }
@@ -51,7 +52,7 @@ function getCode(link) {
     let codes = code.split('.');
     if (codes.length > 1) {
         let suffix = codes[codes.length - 1];
-        if (validMarketSuffixes.indexOf(suffix)) {
+        if (validMarketSuffixes.indexOf(suffix) != -1) {
             let lastIndex = code.lastIndexOf('.' +  suffix);
             code = code.substring(0, lastIndex);
             let codeInt = parseInt(codes[0]);

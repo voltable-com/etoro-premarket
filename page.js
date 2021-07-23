@@ -1,5 +1,6 @@
 const selector = "[data-etoro-automation-id=orders-table-body-cell-action-market-name]";
 const selector1 = "i-portfolio-table-inner-name-symbol"
+const selector2 = 'table-first-name ng-star-inserted'
 
 let jsInitCheck = setInterval(check_after_loading, 300);
 
@@ -19,7 +20,14 @@ function check_after_loading() {
         }
     }
 
-    let divs = document.getElementsByClassName(selector1);
+    // for history page
+    add_links_for_history_page(selector1);
+    // for history page - for other peoples
+    add_links_for_history_page(selector2);
+}
+
+function add_links_for_history_page(selector) {
+    let divs = document.getElementsByClassName(selector);
     if (divs.length > 0) {
         for (let i = 0; i < divs.length; i++) {
             let d = divs[i];
@@ -34,9 +42,7 @@ function check_after_loading() {
                 d.innerText = "";
                 d.appendChild(a);
             }
-
         }
-
     }
 }
 
