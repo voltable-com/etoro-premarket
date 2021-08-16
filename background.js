@@ -57,11 +57,14 @@ function getCode(link) {
             code = code.substring(0, lastIndex);
             let codeInt = parseInt(codes[0]);
             if (!isNaN(codeInt)) {
-                code = codeInt
+                code = '' + codeInt
             }
 
             if(suffix === 'l') {
                 country = 'UK';
+            }
+            if(suffix === 'hk') {
+                country = 'hk';
             }
         }
     }
